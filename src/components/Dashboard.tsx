@@ -37,10 +37,6 @@ export const Dashboard: React.FC<DashboardProps> = ({ items }) => {
     return acc;
   }, []);
 
-  const lowStockList = items
-    .filter(item => item.quantity <= item.minStockLevel)
-    .map(item => ({ name: item.name, quantity: item.quantity, limit: item.minStockLevel }));
-
   const StatCard = ({ title, value, icon, color }: any) => (
     <Card sx={{ height: '100%' }}>
       <CardContent>
@@ -111,7 +107,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ items }) => {
                   outerRadius={80}
                   fill="#8884d8"
                   dataKey="value"
-                  label={({percent}) => `${(percent * 100).toFixed(0)}%`}
+                  label={({percent = 0}) => `${(percent * 100).toFixed(0)}%`}
                 >
                   {categoryData.map((_entry: any, index: number) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
